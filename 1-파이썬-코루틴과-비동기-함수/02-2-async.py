@@ -1,28 +1,24 @@
 import time
 import asyncio
 
-
-async def delivery(name, mealtime):
-    print(f"{name}에게 배달 완료!")
-    await asyncio.sleep(mealtime)
-    print(f"{name} 식사 완료, {mealtime}시간 소요...")
-    print(f"{name} 그릇 수거 완료")
-    return mealtime
-
+async def deliver(meal,t):
+    print(f"{meal} 시작",end=' ')
+    await asyncio.sleep(t)
+    print(f"{meal} 끝, {t} 소요")
+    return t
 
 async def main():
-
-    result = await asyncio.gather(
-        delivery("A", 1),
-        delivery("B", 2),
-        delivery("C", 3),
+    await asyncio.gather(
+        deliver("A", 4),
+        deliver("B", 3),
+        deliver("C", 2),
     )
 
-    print(result)
 
-
-if __name__ == "__main__":
+if __name__=="__main__":
     start = time.time()
     asyncio.run(main())
-    end = time.time()
-    print(end - start)
+    take=time.time()-start
+    print(f"총 {take} 소요")
+
+
