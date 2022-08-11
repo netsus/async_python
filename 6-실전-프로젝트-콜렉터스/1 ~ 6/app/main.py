@@ -14,7 +14,13 @@ templates = Jinja2Templates(directory=BASE_DIR / "templates")
 
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):
-    book = BookModel(keyword="파이썬", publisher="BJPublic", price=1200, image="me.png", hhh="askljdlkas")
+    book = BookModel(
+        keyword="파이썬",
+        publisher="BJPublic",
+        price=1200,
+        image="me.png",
+        hhh="askljdlkas",
+    )
     print(await mongodb.engine.save(book))  # DB에 저장
     return templates.TemplateResponse(
         "./index.html",

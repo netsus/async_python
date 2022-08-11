@@ -5,7 +5,10 @@ from config import get_secret
 
 async def fetch(session, url, i):
     print(i + 1)
-    headers = {"X-Naver-Client-Id": get_secret("NAVER_API_ID"), "X-Naver-Client-Secret": get_secret("NAVER_API_SECRET")}
+    headers = {
+        "X-Naver-Client-Id": get_secret("NAVER_API_ID"),
+        "X-Naver-Client-Secret": get_secret("NAVER_API_SECRET"),
+    }
     async with session.get(url, headers=headers) as response:
         result = await response.json()
         items = result["items"]

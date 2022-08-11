@@ -29,7 +29,10 @@ class NaverBookScraper:
         apis = [self.unit_url(keyword, 1 + i * 10) for i in range(total_page)]
         async with aiohttp.ClientSession() as session:
             all_data = await asyncio.gather(
-                *[NaverBookScraper.fetch(session, api["url"], api["headers"]) for api in apis]
+                *[
+                    NaverBookScraper.fetch(session, api["url"], api["headers"])
+                    for api in apis
+                ]
             )
             result = []
             for data in all_data:
