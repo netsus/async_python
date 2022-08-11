@@ -10,11 +10,12 @@ async def deliver(meal, t):
 
 
 async def main():
-    await asyncio.gather(
+    result = await asyncio.gather(
         deliver("A", 4),
         deliver("B", 3),
         deliver("C", 2),
     )
+    print(result)
 
 
 if __name__ == "__main__":
