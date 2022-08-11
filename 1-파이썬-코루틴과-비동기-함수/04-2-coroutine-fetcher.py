@@ -1,27 +1,23 @@
-# https://docs.aiohttp.org/en/stable/
-# pip install aiohttp~=3.7.3
-
-
 import aiohttp
 import time
-import asyncio
+import asyncio as ac
 
 
-async def fetcher(session, url):
-    async with session.get(url) as response:
+async def fetcher(sess, url):
+    # async response = sess.get(url) # 이거 왜 에러나지?
+    async with sess.get(url) as response:
         return await response.text()
 
 
 async def main():
-    urls = ["https://naver.com", "https://google.com", "https://instagram.com"] * 10
+    urls = ["https://naver.com","https://google.com","https://instagram.com"]
 
-    async with aiohttp.ClientSession() as session:
-        result = await asyncio.gather(*[fetcher(session, url) for url in urls])
+    async with aiohttp.ClientSession() as sess:
+        result = await ac.gather(*[fetcher(sess, url) for url in urls])
         print(result)
-
 
 if __name__ == "__main__":
     start = time.time()
-    asyncio.run(main())
-    end = time.time()
-    print(end - start)  # 4.8
+    ac.run(main())
+    take = time.time() - start
+    print(f"총 {take} 소요")

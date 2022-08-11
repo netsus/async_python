@@ -1,25 +1,17 @@
-# https://2.python-requests.org/en/master/user/advanced/#id1
-# pip install requests
-
 import requests
-import time
+import aiohttp
 
 
 def fetcher(session, url):
-    with session.get(url) as response:
-        return response.text
-
+    response = session.get(url)
+    return response.text
 
 def main():
-    urls = ["https://naver.com", "https://google.com", "https://instagram.com"] * 10
+    urls = ["https://naver.com","https://google.com","https://instagram.com"]
 
-    with requests.Session() as session:
-        result = [fetcher(session, url) for url in urls]
+    with requests.Session() as sess:
+        result = [fetcher(sess, url) for url in urls]
         print(result)
 
-
-if __name__ == "__main__":
-    start = time.time()
+if __name__=="__main__":
     main()
-    end = time.time()
-    print(end - start)  # 12
